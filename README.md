@@ -23,6 +23,16 @@ TermiOS 是一个基于 Web 的操作系统界面，专为管理 Linux 服务器
 - **多语言支持**: 内置国际化 (i18n) 支持，自动检测浏览器语言。
 - **全局认证**: 统一的登录入口，一次登录即可访问所有应用。
 
+## 📂 项目仓库 | Repositories
+
+TermiOS 采用前后端分离架构，代码分布在以下仓库：
+
+| 仓库 | 说明 |
+|------|------|
+| [TermiOS](https://github.com/TermiOSSH/TermiOS) | 📚 主仓库 - 文档和部署配置 (本仓库) |
+| [termios-frontend](https://github.com/TermiOSSH/termios-frontend) | 🎨 前端 - Next.js + React |
+| [termios-backend](https://github.com/TermiOSSH/termios-backend) | ⚙️ 后端 - Node.js + Express |
+
 ## 🛠 技术栈 | Tech Stack
 
 ### 前端 (Frontend)
@@ -103,7 +113,17 @@ docker run -d \
 
 如果您想进行二次开发或本地调试，请按以下步骤操作：
 
-#### 1. 安装依赖
+#### 1. 克隆仓库
+
+```bash
+# 克隆前端仓库
+git clone https://github.com/TermiOSSH/termios-frontend.git frontend
+
+# 克隆后端仓库
+git clone https://github.com/TermiOSSH/termios-backend.git backend
+```
+
+#### 2. 安装依赖
 
 ```bash
 # 安装后端依赖
@@ -115,7 +135,7 @@ cd ../frontend
 npm install
 ```
 
-#### 2. 启动服务
+#### 3. 启动服务
 
 您需要同时启动后端和前端服务。
 
@@ -131,7 +151,7 @@ cd frontend
 npm run dev
 ```
 
-#### 3. 访问应用
+#### 4. 访问应用
 浏览器访问 [http://localhost:3000](http://localhost:3000)
 
 ## 📖 使用指南
@@ -158,6 +178,16 @@ TermiOS is a web-based operating system interface designed for managing Linux se
 - **System Monitoring**: Real-time resource monitoring (CPU, RAM, Disk, Network) similar to Activity Monitor.
 - **Global Auth**: Unified Single Sign-On (SSO) for seamless access to all applications.
 - **i18n Support**: Native internationalization support with automatic language detection.
+
+## 📂 Repositories
+
+TermiOS uses a frontend/backend separation architecture. Code is distributed across the following repositories:
+
+| Repository | Description |
+|------------|-------------|
+| [TermiOS](https://github.com/TermiOSSH/TermiOS) | 📚 Main repo - Documentation & deployment configs (this repo) |
+| [termios-frontend](https://github.com/TermiOSSH/termios-frontend) | 🎨 Frontend - Next.js + React |
+| [termios-backend](https://github.com/TermiOSSH/termios-backend) | ⚙️ Backend - Node.js + Express |
 
 ## 🛠 Tech Stack
 
@@ -226,7 +256,17 @@ docker run -d \
 
 ### Option 2: Local Development
 
-#### 1. Install Dependencies
+#### 1. Clone Repositories
+
+```bash
+# Clone frontend repository
+git clone https://github.com/TermiOSSH/termios-frontend.git frontend
+
+# Clone backend repository
+git clone https://github.com/TermiOSSH/termios-backend.git backend
+```
+
+#### 2. Install Dependencies
 
 ```bash
 # Install Backend Dependencies
@@ -238,7 +278,7 @@ cd ../frontend
 npm install
 ```
 
-#### 2. Start Services
+#### 3. Start Services
 
 You need to run both the backend and frontend servers simultaneously.
 
@@ -254,7 +294,7 @@ cd frontend
 npm run dev
 ```
 
-#### 3. Access Application
+#### 4. Access Application
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 📖 Usage Guide
