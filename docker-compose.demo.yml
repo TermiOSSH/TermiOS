@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  backend:
+    image: ccdecc/termios-backend:latest
+    # To use local build, uncomment build and comment image
+    # build:
+    #   context: .
+    #   dockerfile: docker/backend.Dockerfile
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - SERVER_PASSWORD= # Optional: Set backend access password
+      - CORS_ORIGIN= # Optional: '*' for all; specific domains; or empty for same-origin
+    expose:
+      - "3001"
+    volumes:
+      - ./backend/uploads:/app/uploads
+    networks:
+      - termios-network
+      - demo-net
+    healthcheck:
+      test: [ "CMD", "wget", "-q", "--spider", "http://localhost:3001" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    image: ccdecc/termios-frontend:latest
+    # build:
+    #   context: .
+    #   dockerfile: docker/frontend.Dockerfile
+    restart: always
+    ports:
+      - "3000:80"
+    environment:
+      - BACKEND_URL=
+      - DEFAULT_NODE_PASSWORD= # Default node access password (optional, matches backend SERVER_PASSWORD)
+    depends_on:
+      - backend
+    networks:
+      - termios-network
+
+  demo-linux:
+    build:
+      context: .
+      dockerfile: docker/demo.Dockerfile
+    container_name: termios-demo
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    volumes:
+      - ./docker/honeypot/cpuinfo:/proc/cpuinfo:ro
+    networks:
+      - demo-net
+
+networks:
+  termios-network:
+    driver: bridge
+
+  demo-net:
+    driver: bridge
+    internal: true

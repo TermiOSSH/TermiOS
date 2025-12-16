@@ -1,0 +1,36 @@
+services:
+  backend:
+    image: ccdecc/termios-backend:latest
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - SERVER_PASSWORD= # 可选：设置后端访问密码，保护 WebSocket 连接
+      - CORS_ORIGIN= # 可选：'*' 放开所有跨域；指定域名如 http://a.com,http://b.com 限制跨域；留空则同源模式
+    expose:
+      - "3001"
+    volumes:
+      - ./backend/uploads:/app/uploads
+    networks:
+      - termios-network
+    healthcheck:
+      test: [ "CMD", "wget", "-q", "--spider", "http://localhost:3001" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    image: ccdecc/termios-frontend:latest
+    restart: always
+    ports:
+      - "3000:80"
+    environment:
+      - BACKEND_URL= # 默认节点地址，留空表示使用同源，或填写后端地址如 http://backend:3001
+      - DEFAULT_NODE_PASSWORD= # 默认节点的访问密码（可选，对应后端 SERVER_PASSWORD）
+    depends_on:
+      - backend
+    networks:
+      - termios-network
+
+networks:
+  termios-network:
+    driver: bridge
